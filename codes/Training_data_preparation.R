@@ -60,6 +60,8 @@ for (i in 1:8){
 
 
 
+
+
 training_val <-
   polygon %>% mutate(
     rastMean = raster_extract(input[[1]], polygon, fun = mean, na.rm = TRUE),

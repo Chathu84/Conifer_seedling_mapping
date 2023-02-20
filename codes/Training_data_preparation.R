@@ -1,29 +1,78 @@
 
-seed(123)
+#### Below code prepare training polygons for the one-class classification
 
-list.of.packages <- c("tidyverse","lidR","terra","raster","rgdal","ForestTools","RCSF","sp","sf","stars","rgl")
+
+list.of.packages <- c("sf","rnaturalearth","here","stars","dplyr","ggplot2","ggnewscale","scico","geobgu","ggrepel")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
-library(lidR)
-library(terra)
+#devtools::install_github("michaeldorman/geobgu",force = TRUE)
+
+
+# load packages
+library(sf) # Simple Features for R
+library(rnaturalearth) # World Map Data from Natural Earth
+library(here) # A Simpler Way to Find Your Files
+library(stars) # Spatiotemporal Arrays, Raster and Vector Data Cubes
+library(dplyr) # A Grammar of Data Manipulation
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(ggnewscale) # Multiple Fill and Color Scales in 'ggplot2'
+library(scico) # Colour Palettes Based on the Scientific Colour-Maps
+library(geobgu) # install from GitHub ("michaeldorman/geobgu")
+library(ggrepel) # Automatically Position Non-Overlapping Text Labels with 'ggplot2'
+library(devtools)
 library(raster)
-library(rgdal)
-library(ForestTools)
-library(RCSF)
-library(sp)
-library(sf)
-library(stars)
-library(rgl)
-library(glcm)
+
+
 
 wd = "D:/Carbon_dynamics/UAS-processing/Hm_box1/training/"
 
 setwd(wd)
 
+texture_file = "hm_box1_8-25-2022-6-9texture1.tif"
 
-file_list = dir("D:/Carbon_dynamics/UAS-processing/Hm_box1/training", pattern = "*.laz", full.names = FALSE, ignore.case = TRUE)
-names_to_cloud = substr(file_list, 1, nchar(file_list)-4)
+polygon_file = "training_seedlings.shp"
+
+input = stack(file.path(paste0(wd,"/","texture1/Hm_box1/08-25-2022/",texture_file)))
+
+polygon = st_read(file.path(paste0(wd,"/",polygon_file)))
+
+#input_resamp = raster::focal(input, w = matrix(1,3,3), mean)
+
+input[raster::getValues(input)<0] <- 0
+
+for (i in 1:8){
+  
+  data_frame = paste0("training_val_",i)
+  print( data_frame)
+  
+  data_frame <-
+    polygon %>% mutate(
+      rastMean = raster_extract(input[[i]], polygon, fun = mean, na.rm = TRUE),
+      rastMax = raster_extract(input[[i]], polygon, fun = max, na.rm = TRUE),
+      rastMin = raster_extract(input[[i]], polygon, fun = min, na.rm = TRUE)
+    )
+  data_frame %>%
+    st_set_geometry(NULL) %>%
+    knitr::kable()
+  
+}
+
+
+
+training_val <-
+  polygon %>% mutate(
+    rastMean = raster_extract(input[[1]], polygon, fun = mean, na.rm = TRUE),
+    rastMax = raster_extract(input[[1]], polygon, fun = max, na.rm = TRUE),
+    rastMin = raster_extract(input[[1]], polygon, fun = min, na.rm = TRUE)
+  )
+training_val %>%
+  st_set_geometry(NULL) %>%
+  knitr::kable()
+
+
+
+
 
 # stringr::str_trunc(file_list, 21)
 

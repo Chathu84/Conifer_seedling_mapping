@@ -1,4 +1,4 @@
-# This repository contains data and codes to implement machine learning to detect seedlings in coniferous forests using UAS based data.
+# This repository contains data and codes to implement simple machine learning algorithms (e.g. One-class classsification) to detect seedlings in coniferous forests using UAS based data.
 The data includes;
   1. RGB image based indices
     ## List of indices used in this example:

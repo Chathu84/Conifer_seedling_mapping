@@ -25,15 +25,15 @@ library(raster)
 
 
 
-wd = "D:/Carbon_dynamics/UAS-processing/Hm_box1/training/"
+wd = "E:/Twensday-03/LCMAP/"
 
 setwd(wd)
 
-texture_file = "hm_box1_8-25-2022-6-9texture1.tif"
+texture_file = "LCMAP_011011_1986_2021_V13_SCLAST.tif"
 
-polygon_file = "training_seedlings.shp"
+polygon_file = "MTBS_fires_within_LCMAP11-11_wgs.shp"
 
-input = stack(file.path(paste0(wd,"/","texture1/Hm_box1/08-25-2022/",texture_file)))
+input = stack(file.path(paste0(wd,texture_file)))
 
 polygon = st_read(file.path(paste0(wd,"/",polygon_file)))
 
@@ -43,10 +43,10 @@ input[raster::getValues(input)<0] <- 0
 
 #structural_diversity =  data.frame(matrix(ncol = 18, nrow = 0))
 
-# test=polygon
+# test=polygon???
 test=polygon
 
-for (i in 1:8){
+for (i in 1:36){
   
   data_frame2 = paste0("training_val_",i)
   print( data_frame2)
@@ -55,15 +55,16 @@ for (i in 1:8){
     polygon %>% mutate(
       rastMean = raster_extract(input[[i]], polygon, fun = mean, na.rm = TRUE),
       rastMax = raster_extract(input[[i]], polygon, fun = max, na.rm = TRUE),
-      rastMin = raster_extract(input[[i]], polygon, fun = min, na.rm = TRUE)
+      rastMin = raster_extract(input[[i]], polygon, fun = min, na.rm = TRUE),
+      rastsd = raster_extract(input[[i]], polygon, fun = sd, na.rm = TRUE)
       
     )
   # data_frame %>%
   #   st_set_geometry(NULL) %>%
   #   knitr::kable()
   
-  test = cbind(test,data_frame2$rastMean,data_frame2$rastMax,data_frame2$rastMin)
+  test = cbind(test,data_frame2$rastMean,data_frame2$rastMax,data_frame2$rastMin,data_frame2$rastsd)
   
 }
 
-write.csv(test, "variables_from_texture1.csv")
+write.csv(test, "variables_from_LCMAP_cor.csv", quote=TRUE)

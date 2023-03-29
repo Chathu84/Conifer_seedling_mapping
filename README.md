@@ -16,7 +16,7 @@ The data includes;
 
 ## Methods
 
-This repository contains data and codes to implement simple machine learning algorithms (e.g. One-class classsification) to detect seedlings in coniferous forests using UAS based data.
+This repository contains data and codes to implement simple machine learning algorithms (e.g. One-class classsification, randomforest, SVM) to detect seedlings in coniferous forests using UAS based data.
 
 
 ## Findings

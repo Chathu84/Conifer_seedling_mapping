@@ -1,5 +1,7 @@
 # seedling_mapping_data
 
+[Link to draft manuscript](https://docs.google.com/document/d/1Hu1J3QcODksMo3VFndk2ZhrXqfnAzhjloNDYO1MvFG0/edit)
+
 This project uses UAS based RGB images and sfm based point clouds to map conifer seedlings in a mountainous terrain. 
 
 ## Data

@@ -1,3 +1,14 @@
+# seedling_mapping_data
+
+This project uses UAS based RGB images and sfm based point clouds to map conifer seedlings in a mountainous terrain. 
+
+## Data
+
+## Methods
+
+## Findings
+
+
 # This repository contains data and codes to implement simple machine learning algorithms (e.g. One-class classsification) to detect seedlings in coniferous forests using UAS based data.
 The data includes;
   1. RGB image based indices
@@ -7,4 +18,5 @@ The data includes;
   3. Texture base variables
     ## List of Texture based variables:
 
+ 
 

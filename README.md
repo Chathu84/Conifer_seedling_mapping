@@ -1,4 +1,4 @@
-# Seedling_mapping_data
+# Conifer seedling mapping using UAS data
 
 [Link to draft manuscript](https://docs.google.com/document/d/1Hu1J3QcODksMo3VFndk2ZhrXqfnAzhjloNDYO1MvFG0/edit)
 

@@ -7,11 +7,11 @@ This project uses UAS based RGB images and sfm based point clouds to map conifer
 ## Data
 The data includes;
   1. RGB image based indices
-    ### List of indices used in this example:
+    - List of indices used in this example:
   2. Point cloud based variables
-    ### List of point cloud based variables:
+    - List of point cloud based variables:
   3. Texture base variables
-    ### List of Texture based variables:
+    - List of Texture based variables:
 
 
 ## Methods

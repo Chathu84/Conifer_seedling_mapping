@@ -1,0 +1,6 @@
+
+# Resampling CHM layer 
+Given the spatial resolution diffrences in texture/VI (based on RGB layer) and the CHM (based on point cloud), the CHM layer needs to be resampled to the same spatial resolution and extent of the other layers
+## Steps of resampling and croppping
+1. Resample CHM using the same pixel size and spatial extent of VI/Texture layer. Once this done you may see now the pixel size is same however number of pixels (rows/columns) would be off from one pixel
+2. crop the resampled CHM layer using extract by mask. Use VI/Texture layer as the mask layer and the resampled CHM layer as the input. Don't add processing extent.

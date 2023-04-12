@@ -27,11 +27,11 @@ names_to_cloud = substr(file_list, 1, nchar(file_list)-4)
 
 # stringr::str_trunc(file_list, 21)
 
-site_name <- "Hm_box1"
-flight_datetime <- "08-25-2022"
+site_name <- "texture"
+flight_datetime <- "no_date"
 
 # directories to be created in this script
-L2_geo_dir <- file.path("VI", site_name, flight_datetime)
+L2_geo_dir <- file.path("testing", site_name, flight_datetime)
 
 # image1 = stack(paste0(wd,"/","ortho_hm_box1.tif"))
 # 
@@ -39,9 +39,11 @@ if(!dir.exists(L2_geo_dir)) {
   dir.create(L2_geo_dir, recursive = TRUE)
 }
 
-main_rgb = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/ortho_hm_box1.tif")
-dense_point_cloud <- lidR::readLAS("hm_box1_8-25-2022-6-9.laz")
+main_rgb = stack("D:/Carbon_dynamics/UAS-processing/Heyman/Heyman-10-05-2022/heyman_ortho_10-05-2022.tif")
+dense_point_cloud <- lidR::readLAS("D:/Carbon_dynamics/UAS-processing/Heyman/Heyman-10-05-2022/Heyman-10-05-22-8-1.laz")
 cut_rgb = crop(main_rgb,dense_point_cloud)
+
+crop_img = cut_rgb
 
 for (i in 1:length(names_to_cloud)) #length(names_to_cloud)
 {
@@ -63,10 +65,10 @@ for (i in 1:length(names_to_cloud)) #length(names_to_cloud)
   #cropped_chm_fname <- file.path("data2", site_name,flight_datetime,paste0(names_to_cloud[i], "_chm2.tif"))
   
   
-  # texture = glcm(crop_img[[1]], n_grey = 32, window = c(9, 9), shift = c(3, 1), statistics =
-  #                  c("mean_chm", "variance_chm", "homogeneity_chm", "contrast_chm", "dissimilarity_chm", "entropy_chm",
-  #                    "second_moment_chm", "correlation_chm"), min_x=NULL, max_x=NULL, na_opt="any",
-  #                na_val=NA, scale_factor=1, asinteger=FALSE)
+  texture3 = glcm(crop_img[[3]], n_grey = 32, window = c(9, 9), shift = c(3, 1), statistics =
+                   c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy",
+                     "second_moment", "correlation"), min_x=NULL, max_x=NULL, na_opt="any",
+                 na_val=NA, scale_factor=1, asinteger=FALSE)
   
   
   VI = function(img,i,j,k){
@@ -87,20 +89,20 @@ for (i in 1:length(names_to_cloud)) #length(names_to_cloud)
     return(stack(bi,bj,bk,r,g,b,EXR,VARI,GRVI,MGRVI,CIVE,EXG,GLA)) #
   }
   
-  stack_6_9 = VI(cut_rgb,1,2,3)
+  stack_1 = VI(cut_rgb,1,2,3)
   
-   writeRaster(stack_6_9, texture_image, format="GTiff")
+   writeRaster(stack_1, texture_image, format="GTiff")
   
   
 }
 
-texture1 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/texture1/Hm_box1/08-25-2022/hm_box1_8-25-2022-6-9texture1.tif")
-texture2 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/texture2/Hm_box1/08-25-2022/hm_box1_8-25-2022-6-9texture2.tif")
-texture3 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/texture3/Hm_box1/08-25-2022/hm_box1_8-25-2022-6-9texture3.tif")
+texture1 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/testing/texture1.tif")
+texture2 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/testing/texture2.tif")
+texture3 = stack("D:/Carbon_dynamics/UAS-processing/Hm_box1/training/testing/texture3.tif")
 
-all_img = stack(stack_6_9,texture1,texture2,texture3)
+all_img = stack(stack_1,texture,texture2,texture3)
 
-all_layers <- file.path("VI", site_name,flight_datetime, paste0( names_to_cloud[i],"all_layers.tif"))
+all_layers <- file.path(wd,"testing", site_name,flight_datetime, paste0( "Heyman-10-05-22-8-1_","all_layers.tif"))
 writeRaster(all_img, all_layers, format="GTiff")
 
 

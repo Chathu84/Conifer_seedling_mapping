@@ -5,7 +5,7 @@ require(devtools)
 #Had to install spatial.tools package from the "spatial.tools_1.6.2.tar.gz file before installing Oneclass."
 #install.packages("C:/Users/giil6243/Downloads/spatial.tools_1.6.2.tar.gz", repos = NULL, type='source')
 
-install_github('benmack/oneClass')
+#install_github('benmack/oneClass')
 
 
 library(oneClass)
@@ -31,6 +31,7 @@ library(sf) # Simple Features for R
 library(rnaturalearth) # World Map Data from Natural Earth
 library(here) # A Simpler Way to Find Your Files
 library(stars) # Spatiotemporal Arrays, Raster and Vector Data Cubes
+library(plyr)
 library(dplyr) # A Grammar of Data Manipulation
 library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
 library(ggnewscale) # Multiple Fill and Color Scales in 'ggplot2'
@@ -40,10 +41,21 @@ library(ggrepel) # Automatically Position Non-Overlapping Text Labels with 'ggpl
 library(devtools)
 library(raster)
 
+
+require(rgdal)
+require(sp)
+
+
+
 wd = "D:/Carbon_dynamics/UAS-processing/Hm_box1/training"
 setwd(wd)
-input =  stack(paste0(wd,"/","VI/Hm_box1/08-25-2022/","hm_box1_8-25-2022-6-9all_layers.tif"))
+input =  stack(paste0(wd,"/","testing/texture/no_date/","Heyman-10-05-22-8-1_all_layers.tif"))
 
+chm = stack("chm_resampled.tif")
+
+input = stack(input,chm)
+
+#writeRaster(input,"all_layers_with_chm.tif")
 
 seed <- 123456
 # tr.x <- bananas$tr[, -1]
@@ -55,8 +67,13 @@ seed <- 123456
 # te.x <- extract(bananas$x, te.i)
 # te.y <- extract(bananas$y, te.i)
 
-training = read.csv("training_data_samp_all.csv")
-tr.x <- training[, c(-1,-2)]
+training = read.csv("training_random_pts.csv")
+
+train_var = data.frame(raster::extract(input, training[,c(3,4)] ))
+
+
+#tr.x <- train_var[, c(-1,-2)]
+tr.x <- train_var
 tr.y <- puFactor(training[, 2], positive=1)
 set.seed(seed)
 tr.index <- createFolds(tr.y, k=10, returnTrain=TRUE)
@@ -73,12 +90,14 @@ options(repr.plot.width=14, repr.plot.height=3.5)
 par(mfrow=c(1, 3))
 hist(ocsvm.fit, ocsvm.pred, th=0, noWarnRasHist=TRUE)
 plot(ocsvm.pred, col=brewer.pal(9, "RdBu"))
-plot(ocsvm.pred>0, col=brewer.pal(9, "RdBu")[c(2,9)])
+
+dev.new(width=3, height=3)
+plot(ocsvm.pred>1, col=brewer.pal(9, "RdBu")[c(2,9)])
 
 # dev.new(width=2, height=1)
 # plot(ocsvm.pred>0, col=brewer.pal(9, "RdBu")[c(2,9)])
 
-#terra::writeRaster(ocsvm.pred,"prediction_1.tif")
+terra::writeRaster(ocsvm.pred>1,"pred_great_1-4-5-2023.tif")
 
 
 tuneGrid <- expand.grid( sigma = seq(.1, 2, .1), nu = seq(.05, .5, .05) )
@@ -89,9 +108,9 @@ ocsvm.pred2 <- predict(ocsvm.fit, input)
 
 
 dev.new(width=2, height=1)
-plot(ocsvm.pred2>-0.075, col=brewer.pal(9, "RdBu")[c(2,9)])
+plot(ocsvm.pred2>1, col=brewer.pal(9, "RdBu")[c(2,9)])
 
-hist(ocsvm.fit, ocsvm.pred, th=0, noWarnRasHist=TRUE)
+hist(ocsvm.fit, ocsvm.pred2, th=0, noWarnRasHist=TRUE)
 
 
 # options(repr.plot.width=6, repr.plot.height=5)
@@ -146,6 +165,10 @@ true_y = raster("rec_seed.tif")
 
 clip_x = crop(input,true_y)
 
+writeRaster(clip_x, "X_raster_extract.tif")
+writeRaster(true_y,"Y_raster_extract.tif")
+
+
 true_y[is.na(true_y[])] <- 0 
 
 clip_x[is.na(clip_x[])] <- 0 
@@ -155,14 +178,14 @@ te.i <- sample(ncell(true_y), 1000)
 te.x <- extract(clip_x, te.i)
 te.y <- extract(true_y, te.i)
 
-bsvm.ev <- evaluateOcc(bsvm.fit, te.u=te.x, te.y=te.y, positive=1)
+bsvm.ev <- evaluateOcc(ocsvm.fit, te.u=te.x, te.y=te.y, positive=1)
 
 options(repr.plot.width=7, repr.plot.height=3.5)
 th.sel <- 0
 th.opt <- slot(bsvm.ev, "t")[which.max(slot(bsvm.ev, "kappa"))]
 
 dev.new(width=2, height=1)
-hist(bsvm.fit, bsvm.pred, ylim=c(0, 0.5), col="grey", border=NA, noWarnRasHist=TRUE)
+hist(ocsvm.fit, ocsvm.pred3, ylim=c(0, 0.5), col="grey", border=NA, noWarnRasHist=TRUE)
 plot(bsvm.ev, add=TRUE, yLimits=c(0, 0.5))
 abline(v=c(th.opt, th.sel), lwd=2)
 

@@ -1,24 +1,24 @@
 # Conifer seedling mapping using UAS data
 
-This project uses UAS based RGB images and sfm based point clouds to map conifer seedlings in a mountainous terrain. 
+This project uses UAS based RGB images and followed by structure from mortion (sfm) based point clouds and orthomosaics to map conifer seedlings in postfire mountainous landscapes. 
 
 ## Data
 The data includes;
   1. RGB image based indices
-    - List of indices used in this example:
+    - List of indices used in this study can be foud here
   2. Point cloud based variables
-    - List of point cloud based variables:
+    - Canopy height and rumple index
   3. Texture base variables
-    - List of Texture based variables:
+    - List of Texture based variables used in this study can be foud here
 
 
 ## Methods
 
-This repository contains data and codes to implement simple machine learning algorithms (e.g. One-class classsification, randomforest, SVM) to detect seedlings in coniferous forests using UAS based data.
+This repository contains data and codes to implement simple machine learning algorithms (e.g. neural network(nnet), random forest (fr), Support vector machine (SVM)) to detect seedlings in coniferous forests using UAS based data.
 
 
 ## Findings
-
+Random forest can detect seedlings and other vegetations including shrub, standing dead, mature evergreen trees, and deceduous trees in a co-occuring system at 89% overall accuracy. Vegetetaion indices and canoy height variables were the most importnat variable in identifying each class. The texture variables help to decrease the uncertainty but did not help increase the overall accuracy.
 
 
  

@@ -1,4 +1,4 @@
-# Conifer seedling mapping using UAS data
+# Conifer Seedling Mapping in Postfire Mounatneous Landscapes Using UAS Data
 
 This project uses UAS based RGB images and followed by structure from mortion (sfm) based point clouds and orthomosaics to map conifer seedlings in postfire mountainous landscapes. 
 

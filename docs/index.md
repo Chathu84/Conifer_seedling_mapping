@@ -1,9 +1,9 @@
-# Conifer Seedling Establishment in Post Wildfire Landscape
+# Conifer Seedling Mapping in Postfire Landscapes using UAS Data
 
 
 <p style="text-align: right;"><a href="https://github.com/Chathu84/Conifer_seedling_mapping/edit/main/docs/index.md" title="Edit this page">✏️</a></p>
 
-![Wide banner of the study system](assets/big2.png)
+![Wide banner of the study system]()
 [Raw photo location: big2.png](https://github.com/Chathu84/seedling-establishment/edit/main/docs/assets/big2.png)
 
 **Impact:** 

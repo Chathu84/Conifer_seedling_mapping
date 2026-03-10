@@ -5,10 +5,7 @@
 
 ![Raw photo location](https://github.com/Chathu84/Conifer_seedling_mapping/blob/main/images/Screenshot%202026-03-06%20093448.png) ![Wide banner of the study system](https://github.com/Chathu84/Conifer_seedling_mapping/blob/main/images/Screenshot%202026-03-06%20102237.png)
 
-
-**Impact:** 
-
-We demonstrate where, how, and why conifer seedlings are present/not present and how they keep their density in a post-wildfire landscape in Colorado Front Range using spatial modeling framework producing actionable visuals, a concise briefs, and shareable codes.
+We map conifer seedlings together with other co-occuring vegetation in a post-wildfire landscape in Colorado Front Range using UAS image derived parameters. This repository shares the actionable visuals, a concise briefs, and shareable codes used in the process.
 ---
 ## Project summary
 

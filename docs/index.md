@@ -1,7 +1,7 @@
 # Conifer Seedling Mapping in Postfire Landscapes using UAS Data
 
 
-<p style="text-align: right;"><a href="https://github.com/Chathu84/Conifer_seedling_mapping/edit/main/docs/index.md" title="Edit this page">✏️</a></p>
+<p style="text-align: right;"><a href="docs/index.md" title="Edit this page">✏️</a></p>
 
 ![Raw photo location](https://github.com/Chathu84/Conifer_seedling_mapping/blob/main/images/Screenshot%202026-03-06%20093448.png) ![Wide banner of the study system](https://github.com/Chathu84/Conifer_seedling_mapping/blob/main/images/Screenshot%202026-03-06%20102237.png)
 

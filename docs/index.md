@@ -3,8 +3,8 @@
 
 <p style="text-align: right;"><a href="https://github.com/Chathu84/Conifer_seedling_mapping/edit/main/docs/index.md" title="Edit this page">✏️</a></p>
 
-![Wide banner of the study system]()
-[Raw photo location: big2.png](https://github.com/Chathu84/seedling-establishment/edit/main/docs/assets/big2.png)
+![Wide banner of the study system](images/Screenshot 2026-03-06 093433.png)
+[Raw photo location: Big Elk Fire.png](images/Screenshot 2026-03-06 102237.png)
 
 **Impact:** 
 

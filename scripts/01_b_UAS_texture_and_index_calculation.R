@@ -102,17 +102,17 @@ for (i in 2:length(names_to_cloud)) #length(names_to_cloud)
 
   crop_img = crop(main_rgb,chm_img)
   
-  texture1 = glcm(crop_img[[1]], n_grey = 32, window = c(9, 9), shift = c(3, 1), statistics =
+  texture1 = glcm(crop_img[[1]], n_grey = 32, window = c(3, 3), shift = c(3, 1), statistics =
                     c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy",
                       "second_moment", "correlation"), min_x=NULL, max_x=NULL, na_opt="any",
                   na_val=NA, scale_factor=1, asinteger=FALSE)
   
-  texture2 = glcm(crop_img[[2]], n_grey = 32, window = c(9, 9), shift = c(3, 1), statistics =
+  texture2 = glcm(crop_img[[2]], n_grey = 32, window = c(3, 3), shift = c(3, 1), statistics =
                     c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy",
                       "second_moment", "correlation"), min_x=NULL, max_x=NULL, na_opt="any",
                   na_val=NA, scale_factor=1, asinteger=FALSE)
   
-  texture3 = glcm(crop_img[[3]], n_grey = 32, window = c(9, 9), shift = c(3, 1), statistics =
+  texture3 = glcm(crop_img[[3]], n_grey = 32, window = c(3, 3), shift = c(3, 1), statistics =
                     c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy",
                       "second_moment", "correlation"), min_x=NULL, max_x=NULL, na_opt="any",
                   na_val=NA, scale_factor=1, asinteger=FALSE)

@@ -1,4 +1,4 @@
-# Conifer Seedling Mapping in Postfire Mounatneous Landscapes Using UAS Data
+# Conifer Seedling Mapping in Postfire Mountaneous Landscapes Using UAS Data
 ![Postfire confier seedlings mixed up with dense shrubs](https://github.com/Chathu84/Conifer_seedling_mapping/blob/main/images/figure1.jpg)
 
 This project uses UAS based RGB images and followed by structure from mortion (sfm) based point clouds and orthomosaics to map conifer seedlings in postfire mountainous landscapes. 

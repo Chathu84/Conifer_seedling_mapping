@@ -20,5 +20,5 @@ In the western US and most of the global dry forest landscapes postfire recovery
 ## Team
 | Name | Role | Contact | GitHub |
 |------|------|---------|--------|
-| Nayani Ilangakoon | lead researcher | ginikanda.ilangakoon@colorado.edu | @chathu84 |
+| Nayani Ilangakoon | contact | ginikanda.ilangakoon@colorado.edu | @chathu84 |
 

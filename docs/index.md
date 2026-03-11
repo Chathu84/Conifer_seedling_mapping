@@ -1,7 +1,7 @@
 
 # Conifer Seedling Mapping in Postfire Landscapes using UAS Data
 
-![Wide banner of the study site](images/Screenshot 2026-03-06 093448.png) 
+![Wide banner of the study site:Screenshot 2026-03-06 093448.png](images/Screenshot 2026-03-06 093448.png) 
 
 We map conifer seedlings together with other co-occuring vegetation in a post-wildfire landscape in Colorado Front Range using UAS image derived parameters. This repository shares the actionable visuals, a concise briefs, and shareable codes used in the process.
 ---
